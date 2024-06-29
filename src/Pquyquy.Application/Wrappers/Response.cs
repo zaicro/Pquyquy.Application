@@ -1,155 +1,73 @@
 ﻿namespace Pquyquy.Application.Wrappers;
 
+/// <summary>
+/// Represents a standard response wrapper.
+/// </summary>
+/// <typeparam name="T">Type of the data.</typeparam>
 public class Response<T>
 {
+    /// <summary>
+    /// Indicates if the operation succeeded.
+    /// </summary>
     [JsonProperty("succeeded")]
     public bool Succeeded { get; set; }
 
+    /// <summary>
+    /// Optional message associated with the response.
+    /// </summary>
     [JsonProperty("message")]
     public string Message { get; set; } = "";
 
+    /// <summary>
+    /// List of errors encountered during the operation.
+    /// </summary>
     [JsonProperty("errors")]
     public List<string> Errors { get; set; } = [];
 
+    /// <summary>
+    /// Data returned by the operation.
+    /// </summary>
     [JsonProperty("data")]
     public T Data { get; set; } = default!;
 
-    #region Non Async Success Methods 
+    /// <summary>
+    /// Creates a success response without data.
+    /// </summary>
+    /// <returns>Instance of Response indicating success.</returns>
+    public static Response<T> Success() => 
+        new() { Succeeded = true };
 
-    public static Response<T> Success()
-    {
-        return new Response<T>
-        {
-            Succeeded = true
-        };
-    }
+    /// <summary>
+    /// Creates a success response with specified data.
+    /// </summary>
+    /// <param name="data">Data to include in the response.</param>
+    /// <returns>Instance of Response indicating success with data.</returns>
+    public static Response<T> Success(T data) => 
+        new() { Succeeded = true, Data = data };
 
-    public static Response<T> Success(string message)
-    {
-        return new Response<T>
-        {
-            Succeeded = true,
-            Message = message
-        };
-    }
+    /// <summary>
+    /// Creates a success response with specified data and message.
+    /// </summary>
+    /// <param name="data">Data to include in the response.</param>
+    /// <param name="message">Message to include in the response.</param>
+    /// <returns>Instance of Response indicating success with data and message.</returns>
+    public static Response<T> Success(T data, string message) => 
+        new() { Succeeded = true, Message = message, Data = data };
 
-    public static Response<T> Success(T data)
-    {
-        return new Response<T>
-        {
-            Succeeded = true,
-            Data = data
-        };
-    }
+    /// <summary>
+    /// Creates a failure response with specified message.
+    /// </summary>
+    /// <param name="message">Message indicating reason for failure.</param>
+    /// <returns>Instance of Response indicating failure with message.</returns>
+    public static Response<T> Failure(string message) => 
+        new() { Succeeded = false, Message = message };
 
-    public static Response<T> Success(T data, string message)
-    {
-        return new Response<T>
-        {
-            Succeeded = true,
-            Message = message,
-            Data = data
-        };
-    }
-    #endregion
-
-    #region Non Async Failure Methods 
-
-    public static Response<T> Failure()
-    {
-        return new Response<T>
-        {
-            Succeeded = false
-        };
-    }
-
-    public static Response<T> Failure(string message)
-    {
-        return new Response<T>
-        {
-            Succeeded = false,
-            Message = message
-        };
-    }
-
-    public static Response<T> Failure(T data)
-    {
-        return new Response<T>
-        {
-            Succeeded = false,
-            Data = data
-        };
-    }
-
-    public static Response<T> Failure(T data, string message)
-    {
-        return new Response<T>
-        {
-            Succeeded = false,
-            Message = message,
-            Data = data
-        };
-    }
-
-    public static Response<T> Failure(string message, List<string> errors)
-    {
-        return new Response<T>
-        {
-            Succeeded = false,
-            Message = message,
-            Errors = errors
-        };
-    }
-    #endregion
-
-    #region Async Success Methods 
-
-    public static Task<Response<T>> SuccessAsync()
-    {
-        return Task.FromResult(Success());
-    }
-
-    public static Task<Response<T>> SuccessAsync(string message)
-    {
-        return Task.FromResult(Success(message));
-    }
-
-    public static Task<Response<T>> SuccessAsync(T data)
-    {
-        return Task.FromResult(Success(data));
-    }
-
-    public static Task<Response<T>> SuccessAsync(T data, string message)
-    {
-        return Task.FromResult(Success(data, message));
-    }
-    #endregion
-
-    #region Non Async Failure Methods 
-
-    public static Task<Response<T>> FailureAsync()
-    {
-        return Task.FromResult(Failure());
-    }
-
-    public static Task<Response<T>> FailureAsync(string message)
-    {
-        return Task.FromResult(Failure(message));
-    }
-
-    public static Task<Response<T>> FailureAsync(T data)
-    {
-        return Task.FromResult(Failure(data));
-    }
-
-    public static Task<Response<T>> FailureAsync(T data, string message)
-    {
-        return Task.FromResult(Failure(data, message));
-    }
-
-    public static Task<Response<T>> FailureAsync(string message, List<string> errors)
-    {
-        return Task.FromResult(Failure(message, errors));
-    }
-    #endregion
+    /// <summary>
+    /// Creates a failure response with specified message and list of errors.
+    /// </summary>
+    /// <param name="message">Message indicating reason for failure.</param>
+    /// <param name="errors">List of errors encountered.</param>
+    /// <returns>Instance of Response indicating failure with message and errors.</returns>
+    public static Response<T> Failure(string message, List<string> errors) => 
+        new() { Succeeded = false, Message = message, Errors = errors };
 }

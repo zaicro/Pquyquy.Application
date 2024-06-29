@@ -13,9 +13,13 @@
 		<RootNamespace>Pquyquy.Application</RootNamespace>
 		<Authors>Andres Martinez</Authors>
 		<Copyright>Copyright © 2024</Copyright>
-		<Description>Base library for the application layer</Description>
+		<Description>A flexible and extensible library for the application layer in clean architecture for .NET applications.</Description>
+		<Summary>A flexible and extensible library for the application layer in clean architecture for .NET applications.</Summary>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
-		<Version>1.0.0</Version>
+		<Version>1.1.0</Version>
+		<PackageTags>Clean architecture;Application Logic</PackageTags>
+		<PackageProjectUrl>https://github.com/</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/</RepositoryUrl>
 	</PropertyGroup>
 
 	<ItemGroup>

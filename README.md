@@ -1,6 +1,6 @@
 # Pquyquy.Application
 
-Pquyquy.Domain is a .NET library that forms part of the Pquyquy project group. This library provides common functionalities such as Behaviors, Exceptions, Wrappers, among others, that assist the main application layer.
+Pquyquy.Application is a .NET library that forms part of the Pquyquy project group. This library provides common functionalities such as Behaviors, Exceptions, Wrappers, among others, that assist the main application layer.
 
 ## Table of Contents
 
